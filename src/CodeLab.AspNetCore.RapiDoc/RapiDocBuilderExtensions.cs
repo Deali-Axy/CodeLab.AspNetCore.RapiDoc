@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 
-namespace IGeekFan.AspNetCore.RapiDoc
+namespace CodeLab.AspNetCore.RapiDoc
 {
     public static class RapiDocBuilderExtensions
     {

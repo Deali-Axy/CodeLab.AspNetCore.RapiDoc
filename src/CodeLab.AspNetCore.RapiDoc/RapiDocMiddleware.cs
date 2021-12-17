@@ -17,11 +17,10 @@ using System.Collections.Generic;
 #if NETSTANDARD2_0
 using IWebHostEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 #endif
-namespace IGeekFan.AspNetCore.RapiDoc
-{
-    public class RapiDocMiddleware
-    {
-        private const string EmbeddedFileNamespace = "IGeekFan.AspNetCore.RapiDoc.node_modules.rapidoc.dist";
+
+namespace CodeLab.AspNetCore.RapiDoc {
+    public class RapiDocMiddleware {
+        private const string EmbeddedFileNamespace = "CodeLab.AspNetCore.RapiDoc.node_modules.rapidoc.dist";
 
         private readonly RapiDocOptions _options;
         private readonly StaticFileMiddleware _staticFileMiddleware;
@@ -31,8 +30,7 @@ namespace IGeekFan.AspNetCore.RapiDoc
             RequestDelegate next,
             IWebHostEnvironment hostingEnv,
             ILoggerFactory loggerFactory,
-            RapiDocOptions options)
-        {
+            RapiDocOptions options) {
             _options = options ?? new RapiDocOptions();
 
             _staticFileMiddleware = CreateStaticFileMiddleware(next, hostingEnv, loggerFactory, options);
@@ -43,14 +41,12 @@ namespace IGeekFan.AspNetCore.RapiDoc
             _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, false));
         }
 
-        public async Task Invoke(HttpContext httpContext)
-        {
+        public async Task Invoke(HttpContext httpContext) {
             var httpMethod = httpContext.Request.Method;
             var path = httpContext.Request.Path.Value;
 
             // If the RoutePrefix is requested (with or without trailing slash), redirect to index URL
-            if (httpMethod == "GET" && Regex.IsMatch(path, $"^/?{Regex.Escape(_options.RoutePrefix)}/?$"))
-            {
+            if (httpMethod == "GET" && Regex.IsMatch(path, $"^/?{Regex.Escape(_options.RoutePrefix)}/?$")) {
                 // Use relative redirect to support proxy environments
                 var relativeRedirectPath = path.EndsWith("/")
                     ? "index.html"
@@ -60,28 +56,25 @@ namespace IGeekFan.AspNetCore.RapiDoc
                 return;
             }
 
-            if (httpMethod == "GET" && Regex.IsMatch(path, $"^/{Regex.Escape(_options.RoutePrefix)}/?index.html$"))
-            {
+            if (httpMethod == "GET" && Regex.IsMatch(path, $"^/{Regex.Escape(_options.RoutePrefix)}/?index.html$")) {
                 await RespondWithIndexHtml(httpContext.Response);
                 return;
             }
 
-            if (httpMethod == "GET" && Regex.IsMatch(path, $"^/{Regex.Escape(_options.RoutePrefix)}/?oauth-receiver.html$"))
-            {
+            if (httpMethod == "GET" && Regex.IsMatch(path, $"^/{Regex.Escape(_options.RoutePrefix)}/?oauth-receiver.html$")) {
                 await RespondWithOAuthReceiverHtml(httpContext.Response);
                 return;
             }
+
             await _staticFileMiddleware.Invoke(httpContext);
         }
-      
+
         private StaticFileMiddleware CreateStaticFileMiddleware(
             RequestDelegate next,
             IWebHostEnvironment hostingEnv,
             ILoggerFactory loggerFactory,
-            RapiDocOptions options)
-        {
-            var staticFileOptions = new StaticFileOptions
-            {
+            RapiDocOptions options) {
+            var staticFileOptions = new StaticFileOptions {
                 RequestPath = string.IsNullOrEmpty(options.RoutePrefix) ? string.Empty : $"/{options.RoutePrefix}",
                 FileProvider = new EmbeddedFileProvider(typeof(RapiDocMiddleware).GetTypeInfo().Assembly, EmbeddedFileNamespace),
             };
@@ -89,24 +82,20 @@ namespace IGeekFan.AspNetCore.RapiDoc
             return new StaticFileMiddleware(next, hostingEnv, Options.Create(staticFileOptions), loggerFactory);
         }
 
-        private void RespondWithRedirect(HttpResponse response, string location)
-        {
+        private void RespondWithRedirect(HttpResponse response, string location) {
             response.StatusCode = 301;
             response.Headers["Location"] = location;
         }
 
-        private async Task RespondWithIndexHtml(HttpResponse response)
-        {
+        private async Task RespondWithIndexHtml(HttpResponse response) {
             response.StatusCode = 200;
             response.ContentType = "text/html;charset=utf-8";
 
-            using (var stream = _options.IndexStream())
-            {
+            using (var stream = _options.IndexStream()) {
                 // Inject arguments before writing to response
                 var htmlBuilder = new StringBuilder(new StreamReader(stream).ReadToEnd());
 
-                foreach (var entry in GetIndexArguments())
-                {
+                foreach (var entry in GetIndexArguments()) {
                     htmlBuilder.Replace(entry.Key, entry.Value);
                 }
 
@@ -114,17 +103,14 @@ namespace IGeekFan.AspNetCore.RapiDoc
             }
         }
 
-        private async Task RespondWithOAuthReceiverHtml(HttpResponse response)
-        {
+        private async Task RespondWithOAuthReceiverHtml(HttpResponse response) {
             response.StatusCode = 200;
             response.ContentType = "text/html;charset=utf-8";
 
-            using (var stream = _options.OAuthReceiverStream())
-            {
+            using (var stream = _options.OAuthReceiverStream()) {
                 var htmlBuilder = new StringBuilder(new StreamReader(stream).ReadToEnd());
 
-                foreach (var entry in GetIndexArguments())
-                {
+                foreach (var entry in GetIndexArguments()) {
                     htmlBuilder.Replace(entry.Key, entry.Value);
                 }
 
@@ -133,15 +119,16 @@ namespace IGeekFan.AspNetCore.RapiDoc
         }
 
 
-        private IDictionary<string, string> GetIndexArguments()
-        {
-            return new Dictionary<string, string>()
-            {
+        private IDictionary<string, string> GetIndexArguments() {
+            return new Dictionary<string, string>() {
                 { "%(DocumentTitle)", _options.DocumentTitle },
                 { "%(HeadContent)", _options.HeadContent },
                 { "%(Url)", _options.ConfigObject.Urls.First().Url },
                 { "%(ConfigObject)", JsonSerializer.Serialize(_options.ConfigObject, _jsonSerializerOptions) },
-                { "%(OAuthConfigObject)", JsonSerializer.Serialize(_options.OAuthConfigObject, _jsonSerializerOptions) }
+                { "%(OAuthConfigObject)", JsonSerializer.Serialize(_options.OAuthConfigObject, _jsonSerializerOptions) },
+                { "%(Theme)", _options.ConfigObject.Theme },
+                { "%(RenderStyle)", _options.ConfigObject.RenderStyle },
+                { "%(SchemaStyle)", _options.ConfigObject.SchemaStyle }
             };
         }
     }

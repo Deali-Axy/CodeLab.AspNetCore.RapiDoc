@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IGeekFan.AspNetCore.RapiDoc
+namespace CodeLab.AspNetCore.RapiDoc
 {
     /// <summary>
-    /// https://mrin9.github.io/RapiDoc/api.html  now not support
+    /// <para>标准的Rapi文档配置选项，原作者说现在还不支持</para>
+    /// <para>todo 那我接下来准备给他实现一下</para>
+    /// <para>https://mrin9.github.io/RapiDoc/api.html  now not support</para>
     /// </summary>
     class GenericRapiConfig
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace IGeekFan.AspNetCore.RapiDoc
+namespace CodeLab.AspNetCore.RapiDoc
 {
     public class RapiDocOptions
     {
@@ -18,10 +18,10 @@ namespace IGeekFan.AspNetCore.RapiDoc
         /// Gets or sets a Stream function for retrieving the swagger-ui page
         /// </summary>
         public Func<Stream> IndexStream { get; set; } = () => typeof(RapiDocOptions).GetTypeInfo().Assembly
-            .GetManifestResourceStream("IGeekFan.AspNetCore.RapiDoc.index.html");
+            .GetManifestResourceStream("CodeLab.AspNetCore.RapiDoc.index.html");
 
         public Func<Stream> OAuthReceiverStream { get; set; } = () => typeof(RapiDocOptions).GetTypeInfo().Assembly
-        .GetManifestResourceStream("IGeekFan.AspNetCore.RapiDoc.oauth-receiver.html");
+        .GetManifestResourceStream("CodeLab.AspNetCore.RapiDoc.oauth-receiver.html");
 
         /// <summary>
         /// Gets or sets a title for the swagger-ui page
@@ -135,6 +135,21 @@ namespace IGeekFan.AspNetCore.RapiDoc
 
         [JsonExtensionData]
         public Dictionary<string, object> AdditionalItems { get; set; } = new Dictionary<string, object>();
+
+        /// <summary>
+        /// RapiDoc 主题：light、dark
+        /// </summary>
+        public string Theme { get; set; } = "light";
+
+        /// <summary>
+        /// RapiDoc 渲染模式：read、focused
+        /// </summary>
+        public string RenderStyle { get; set; } = "read";
+
+        /// <summary>
+        /// RapiDoc 呈现模式：tree、table
+        /// </summary>
+        public string SchemaStyle { get; set; } = "tree";
     }
 
     public class UrlDescriptor

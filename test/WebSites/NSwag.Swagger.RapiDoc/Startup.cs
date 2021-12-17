@@ -1,5 +1,5 @@
 
-using IGeekFan.AspNetCore.RapiDoc;
+using CodeLab.AspNetCore.RapiDoc;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

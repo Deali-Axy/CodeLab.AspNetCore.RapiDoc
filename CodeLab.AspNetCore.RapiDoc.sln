@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGeekFan.AspNetCore.RapiDoc", "src\IGeekFan.AspNetCore.RapiDoc\IGeekFan.AspNetCore.RapiDoc.csproj", "{BFA6BBD8-2862-4CAC-AB20-D14E8DC04DD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLab.AspNetCore.RapiDoc", "src\CodeLab.AspNetCore.RapiDoc\CodeLab.AspNetCore.RapiDoc.csproj", "{BFA6BBD8-2862-4CAC-AB20-D14E8DC04DD5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B5103435-9FCA-4BDF-ACCF-5F5A347CEF53}"
 EndProject

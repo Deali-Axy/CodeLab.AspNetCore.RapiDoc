@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NCaptcha.AspNetCore.SessionImages;
-using IGeekFan.AspNetCore.RapiDoc;
+using CodeLab.AspNetCore.RapiDoc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Interfaces;
 using Microsoft.OpenApi.Any;

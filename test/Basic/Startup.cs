@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 using Basic.Swagger;
 using Microsoft.AspNetCore.Localization;
 using System.IO;
-using IGeekFan.AspNetCore.RapiDoc;
+using CodeLab.AspNetCore.RapiDoc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Basic

@@ -16,6 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\IGeekFan.AspNetCore.RapiDoc\IGeekFan.AspNetCore.RapiDoc.csproj" />
+    <ProjectReference Include="..\..\src\CodeLab.AspNetCore.RapiDoc\CodeLab.AspNetCore.RapiDoc.csproj" />
   </ItemGroup>
 </Project>

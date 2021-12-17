@@ -2,7 +2,7 @@
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using IGeekFan.AspNetCore.RapiDoc;
+using CodeLab.AspNetCore.RapiDoc;
 
 namespace Microsoft.AspNetCore.Builder
 {
