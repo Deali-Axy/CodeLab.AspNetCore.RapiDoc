@@ -1,5 +1,10 @@
 <div align="center">
-<h1 align="center"> <img alt="MrinDoc logo" src="docs/images/logo.png" width="40px" />  IGeekFan.AspNetCore.RapiDoc </h1>
+<h1 align="center"> 
+<img alt="MrinDoc logo" src="docs/images/logo.png" width="40px" /> 
+CodeLab.AspNetCore.RapiDoc
+</h1>
+
+（fork自IGeekFan.AspNetCore.RapiDoc）
 
 **[RapiDoc](https://github.com/mrin9/RapiDoc)** Custom Element for Open-API spec viewing ，支持 .NET Core3.1 、.NET Standard2.0、.NET5.0。
 
@@ -13,6 +18,17 @@
     <span>中文</span> |  
 </p>
 </div>
+
+## 更新内容
+
+在原版 IGeekFan.AspNetCore.RapiDoc 的基础上，实现了RapiDoc的几项配置：
+- Theme
+- RenderStyle
+- SchemaStyle
+
+我看到原作者在`GenericRapiConfig.cs`文件中定义了RapiDoc的配置，但是没有实现。
+
+接下来计划实现更多的RapiDoc配置~
 
 ## 相关依赖项
 ### [RapiDoc](https://github.com/mrin9/RapiDoc)
